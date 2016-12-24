@@ -1,0 +1,171 @@
+/* Master Styles */
+*{
+   margin:0px;
+   padding:0px;
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+h2, h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+body {
+  overflow-X:hidden;
+
+}
+@font-face{
+  font-family:Ubuntu;
+  src:url(Fonts/Ubuntu-R_0.woff);
+  
+}
+@font-face{
+  font-family:DUBIEL;
+  src:url(Fonts/DUBIEL.woff);
+}
+@font-face{
+  font-family:Neuton-Regular;
+  src:url(Fonts/Neuton-Regular.woff);
+}
+@font-face {
+    font-family: myFirstFont;
+    src: url(Fonts/GEOSANSLIGHT.woff);
+	font-weight: lighter;
+}
+@font-face {
+    font-family: points;
+    src: url(Fonts/Nilland.woff);
+	font-weight: lighter;
+}
+
+@font-face {
+    font-family: headerFont;
+    src: url(Fonts/NexaBold.woff);
+	font-weight: lighter;
+	width: 300%;
+	box-shadow: 2px 2px 6px #aaaaaa;
+}
+#opening{
+ margin-left:70px;
+ margin-right:70px;
+ text-align:center;
+ padding-top:10px;
+ font-family: myFirstFont;
+ line-height:150%;
+ font-size:20px;
+}
+#outerpoints{
+  background-image:url('img/background.jpg');
+  
+}
+#designerDashboard{
+  src:url('img/designerDashboard.jpg');
+  box-shadow: 2px 2px 6px #aaaaaa;
+}
+#outerpoints #left div{
+  padding:30px;
+}
+#outerpoints #right div{
+  padding:30px;
+}
+#pointheader{
+     font-family:DUBIEL ;
+	 text-align:center;
+	 padding-bottom:33px;
+	 font-size:50px;
+	 font-weight:normal;
+}
+u{
+    color:"#aaaaaa";
+}
+.img-circle {
+    border-radius: 50%;
+}
+#intro{
+    font-family: myFirstFont;
+	text-align:center;
+}
+#in{
+   padding:2px;
+}
+#joiningHeader{
+  text-align:center;
+  font-weight: lighter;
+  font-size: 40px;
+}
+#tag{
+  text-align:center;
+  font-size:16px;
+  font-weight:lighter;
+  font-family:Ubuntu;
+}
+#howitworks{
+  padding-top:50px;
+  margin-left:215px;
+}
+#howitworks div{
+ float:left;
+ margin-right:100px;
+ height:260px;
+ width:252px;
+
+}
+#howitworks div img{
+ margin-left:81px;
+}
+#applyhere{
+  text-align:center;
+  font-family:Neuton-Regular;
+  font-size:25px;
+}
+#applyhere1{
+  text-align:center;
+  font-family:Neuton-Regular;
+  font-size:25px;
+}
+#applyhere2{
+  text-align:center;
+  font-family:Neuton-Regular;
+  font-size:25px;
+}
+#CopyCatImg{
+   position:absolute;
+}
+.how{
+  font-family: points;
+  text-align:center;
+}
+#CopyCat{
+ 
+ position:relative;
+ 
+}
+#CopyCat a{
+  width:186px;
+  height:50px;
+  margin-top:140px;
+  margin-left:590px;
+  position:absolute;
+  background-color:#3ba579;
+  color:#FFFFFF;
+  font-family:Ubuntu;
+  opacity:50%;
+  font-size:20px;
+  border-radius:10px;
+  border:none;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  padding-top:10px;
+  padding-left:40px;
+}
+#CopyCat a:hover{
+   background-color: #349e72;
+    color: white;
+	transform: scale(1.03,1.03);
+	opacity:50%;
+	box-shadow: 2px 2px 6px #555555;
+
+
+}
