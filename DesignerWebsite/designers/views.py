@@ -14,4 +14,4 @@ def index(request):
 
 class DesignerCreate(CreateView):
     model=Designers
-    fields = ['name','firmname','contact','address','design']
+    fields = ['name','firmname','contact','address','design','email']

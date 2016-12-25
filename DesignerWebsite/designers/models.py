@@ -11,7 +11,7 @@ class Designers(models.Model):
     address=models.CharField(max_length=500)
     design=models.FileField(null=True)
     points=models.IntegerField(default=100)
-
+    email=models.CharField(max_length=150,null=True)
 
 
     def get_absolute_url(self):
