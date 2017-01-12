@@ -5,13 +5,8 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 class Designers(models.Model):
     designerID=models.CharField(max_length=15)
-    name=models.CharField(max_length=250)
-    firmname=models.CharField(max_length=300)
-    contact=models.CharField(max_length=13)
-    address=models.CharField(max_length=500)
-    design=models.FileField(null=True)
-    points=models.IntegerField(default=100)
-    email=models.CharField(max_length=150,null=True)
+    password=models.CharField(max_length=8,null=True)
+
 
 
     def get_absolute_url(self):

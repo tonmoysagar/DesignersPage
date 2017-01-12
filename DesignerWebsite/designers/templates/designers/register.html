@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ghar Banao Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">
+                <img src="{% static 'img/gharBanaoIcon.png' %}">
+            </a>
+        </div>
+         <br>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">OUR DESIGNERS</a></li>
+            <li><a href="#">ABOUT US</a></li>
+            <li><a href="{% url 'index' %}">HOME</a></li>
+        </ul>
+
+    </div>
+</nav>
+    <br>
+     <br>
+     <br>
+     <br>
+<br>
+     <br>
+     <br>
+
+      <form name = "form" action = "{% url "designers.views.registeration" %}"
+         method = "POST" >{% csrf_token %}
+
+         <div style = "max-width:470px;">
+            <center>
+               <input type = "text" style = "margin-left:20%;"
+                  placeholder = "Identifiant" name = "designerID" />
+            </center>
+         </div>
+
+         <br>
+
+
+         <div style = "max-width:470px;">
+            <center>
+               <input type = "password" style = "margin-left:20%;"
+                  placeholder = "Identifiant" name = "password" />
+            </center>
+         </div>
+
+
+         <br>
+
+         <div style = "max-width:470px;">
+            <center>
+
+               <button style = "border:0px; background-color:#4285F4; margin-top:8%;
+                  height:35px; width:80%;margin-left:19%;" type = "submit"
+                  value = "Login" >
+                  <strong>Login</strong>
+               </button>
+
+            </center>
+         </div>
+
+      </form>
+
+   </body>
+</body>
+</html>
