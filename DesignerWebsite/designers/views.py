@@ -3,6 +3,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView
 from .  models import Designers
 from . forms import DesignerDetails
+from django.http import Http404
 # Create your views here.
 def index(request):
 
@@ -25,11 +26,15 @@ def registeration(request):
 
             password=MyRegisterForm.cleaned_data['password']
             print(designerID)
+            try:
+               dbuser = Designers.objects.filter(designerID=designerID)
+            except dbuser.DOESNOTEXISTS :
+                raise Http404
         else:
             print("not valid")
     else:
        MyRegisterForm=DesignerDetails(request.GET)
-    return render(request,'designers/register.html',{'designerID':designerID,'password':password})
+    return render(request,'designers/loggedin.html',{'designerID':designerID})
 
 class DesignerCreate(CreateView):
     model=Designers
