@@ -26,15 +26,22 @@ def registeration(request):
 
             password=MyRegisterForm.cleaned_data['password']
             print(designerID)
-            try:
-               dbuser = Designers.objects.filter(designerID=designerID)
-            except dbuser.DOESNOTEXISTS :
-                raise Http404
+            dbuser = Designers.objects.filter(designerID=designerID)
+            if not dbuser:
+                print("Not user")
+                return render(request, 'designers/register.html', {})
+
+
+            else:
+                print(dbuser)
+                return render(request,'designers/loggedin.html',{'designerID':designerID})
+
         else:
             print("not valid")
+            return render(request, 'designers/register.html', {})
     else:
        MyRegisterForm=DesignerDetails(request.GET)
-    return render(request,'designers/loggedin.html',{'designerID':designerID})
+       return render(request, 'designers/register.html', {})
 
 class DesignerCreate(CreateView):
     model=Designers
