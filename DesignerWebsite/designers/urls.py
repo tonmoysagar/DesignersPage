@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'add/$',views.DesignerCreate.as_view(),name='register'),
     url(r'login/$',TemplateView.as_view(template_name='designers/register.html')),
     url(r'registeration/$', views.registeration , name='registeration'),
+    url(r'^logout/$', views.logout, name = 'logout'),
 ]
