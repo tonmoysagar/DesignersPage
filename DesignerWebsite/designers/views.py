@@ -26,7 +26,7 @@ def registeration(request):
 
             password=MyRegisterForm.cleaned_data['password']
             print(designerID)
-            dbuser = Designers.objects.filter(designerID=designerID)
+            dbuser = Designers.objects.filter(designerID=designerID,password=password)
             if not dbuser:
                 print("Not user")
                 return render(request, 'designers/register.html', {})
