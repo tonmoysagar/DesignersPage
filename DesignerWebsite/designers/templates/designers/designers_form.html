@@ -16,16 +16,16 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="{% url 'index' %}" class="navbar-brand">
+            <a href="{% url 'designers:index' %}" class="navbar-brand">
                 <img src="{% static 'img/gharBanaoIcon.png' %}">
             </a>
         </div>
          <br>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'login' %}">LOGIN</a></li>
+            <li><a href="{% url 'designers:login' %}">LOGIN</a></li>
             <li><a href="#">OUR DESIGNERS</a></li>
             <li><a href="#">ABOUT US</a></li>
-            <li><a href="{% url 'index' %}">HOME</a></li>
+            <li><a href="{% url 'designers:index' %}">HOME</a></li>
 
         </ul>
 
@@ -49,8 +49,8 @@
                             {% for field in form %}
                             <div class="form-group">
 
-                                <br>
-                                <label class="control-label col-sm-2">{{field.label_tag}}</label> <br>
+
+                                <label class="form-control col-sm-2">{{field.label_tag}}</label> <br>
                                 <div class="col sm-10">{{field}}</div>
 
                                  <div class=" col-sm-2 col-md-10">

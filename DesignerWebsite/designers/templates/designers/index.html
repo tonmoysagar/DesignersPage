@@ -19,7 +19,7 @@
    <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="{% url 'index' %}" class="navbar-brand">
+            <a href="{% url 'designers:index' %}" class="navbar-brand">
                 <img src="{% static 'img/gharBanaoIcon.png' %}">
             </a>
         </div>
@@ -27,8 +27,8 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#">OUR DESIGNERS</a></li>
             <li><a href="#">ABOUT US</a></li>
-            <li><a href="{% url 'login' %}">LOGIN</a></li>
-			<li><a href="{% url 'register' %}">REGISTER</a></li>
+            <li><a href="{% url 'designers:login' %}">LOGIN</a></li>
+			<li><a href="{% url 'designers:register' %}">REGISTER</a></li>
         </ul>
 
     </div>
@@ -175,7 +175,7 @@ And so we are on a constant lookout for dynamic and talented professionals who c
 			  <br style="clear: left;" />
 			  <img  id="CopyCatImg" src="{% static 'img/designerFooter.png' %}" style="float:left ;height:190px;width:1366px;box-shadow: 4px 3px 7px #aaaaaa;">
 
-			  <a href="{% url 'register' %}">APPLY NOW</a>
+			  <a href="{% url 'designers:register' %}">APPLY NOW</a>
 			  </div>
 			  <br>
 			  <br><br>

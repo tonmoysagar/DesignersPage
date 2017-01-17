@@ -12,16 +12,16 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="{% url 'index' %}" class="navbar-brand">
+            <a href="{% url 'designers:index' %}" class="navbar-brand">
                 <img src="{% static 'img/gharBanaoIcon.png' %}">
             </a>
         </div>
          <br>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'register' %}">REGISTER</a></li>
+            <li><a href="{% url 'designers:register' %}">REGISTER</a></li>
             <li><a href="#">OUR DESIGNERS</a></li>
             <li><a href="#">ABOUT US</a></li>
-            <li><a href="{% url 'index' %}">HOME</a></li>
+            <li><a href="{% url 'designers:index' %}">HOME</a></li>
         </ul>
 
     </div>
@@ -36,7 +36,7 @@
 <div   style="padding-left:34%;padding-top:40px;opacity:40%">
 
 
-      <form name = "form" action = "{% url "designers.views.registeration" %}"
+      <form name = "form" action = "{% url "designers:designers.views.registeration" %}"
          method = "POST" style="background-color:rgba(255,255,255,0.7);width:40%;border-radius:20px"  id="opening" >{% csrf_token %}
           <div style="background:#008553 ;width=40%;border-top-left-radius:20px;border-top-right-radius:20px">
 
@@ -76,7 +76,7 @@
                   value = "Login"  >
                   <strong>LOGIN</strong>
                </button><br>or<br>
-                 <a href="{% url 'register' %}" id="register" >Sign up here</a>
+                 <a href="{% url 'designers:register' %}" id="register" >Sign up here</a>
 
             </center>
 
