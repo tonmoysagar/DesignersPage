@@ -17,7 +17,7 @@ class Designers(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('index')
+        return reverse('designers:index')
 
 
     def __str__(self):
