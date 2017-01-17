@@ -19,7 +19,7 @@
    <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="#" class="navbar-brand">
+            <a href="{% url 'index' %}" class="navbar-brand">
                 <img src="{% static 'img/gharBanaoIcon.png' %}">
             </a>
         </div>
@@ -27,7 +27,8 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#">OUR DESIGNERS</a></li>
             <li><a href="#">ABOUT US</a></li>
-            <li><a href="{% url 'register' %}">LOGIN/REGISTER</a></li>
+            <li><a href="{% url 'login' %}">LOGIN</a></li>
+			<li><a href="{% url 'register' %}">REGISTER</a></li>
         </ul>
 
     </div>

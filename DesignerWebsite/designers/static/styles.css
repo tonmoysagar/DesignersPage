@@ -159,6 +159,7 @@ u{
   cursor: pointer;
   padding-top:10px;
   padding-left:40px;
+  text-decoration: none;
 }
 #CopyCat a:hover{
    background-color: #349e72;
@@ -166,6 +167,6 @@ u{
 	transform: scale(1.03,1.03);
 	opacity:50%;
 	box-shadow: 2px 2px 6px #555555;
-
+    text-decoration: none;
 
 }

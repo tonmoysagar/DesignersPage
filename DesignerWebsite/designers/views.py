@@ -49,6 +49,9 @@ def registeration(request):
             return render(request, 'designers/register.html', {})
     else:
        MyRegisterForm=DesignerDetails(request.GET)
+       if request.session.has_key('designerID'):
+           designerID = request.session['designerID']
+           return render(request, 'designers/loggedin.html', {"designerID": designerID})
        return render(request, 'designers/register.html', {})
 
 class DesignerCreate(CreateView):
@@ -61,3 +64,9 @@ def logout(request):
    except:
       pass
    return HttpResponse("<strong>You are logged out.</strong>")
+
+def login(request):
+    if request.session.has_key('designerID'):
+        designerID = request.session['designerID']
+        return render(request, 'designers/loggedin.html', {"designerID": designerID})
+    return  render(request,'designers/register.html',{})
