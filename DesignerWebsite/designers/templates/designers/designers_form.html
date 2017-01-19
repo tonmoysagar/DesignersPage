@@ -11,6 +11,10 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,15 +43,15 @@
      <br>
      <br>
 
-    <div class="container-fluid" style="margin-left:25%">
+    <div style="margin-left:23%">
         <div class="row">
-            <div class="col-sm-12 col-md-7">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <div class="col-sm-5 col-md-9">
+                <div >
+                    <div >
+                        <form  action="" method="post" enctype="multipart/form-data" style="background-color:rgba(255,255,255,0.7); padding:5%;border-radius:20px;box-shadow:2 7 8;">
                             {% csrf_token %}
                             {% for field in form %}
-                            <div class="form-group">
+                            <div class="form-group" >
 
 
                                 <label class="form-control col-sm-2">{{field.label_tag}}</label> <br>
@@ -58,9 +62,11 @@
                                 </div>
                             </div>
                             {% endfor %}
-                            <div class="col-sm-5 col-md-10" style="margin-left:25%">
-                                <button type="submit" class="btn btn-success">submit</button>
+                            <center>
+                            <div >
+                                <button class="CopyCat" type="submit" >Submit</button>
                             </div>
+                                </center>
                         </form>
                     </div>
                 </div>

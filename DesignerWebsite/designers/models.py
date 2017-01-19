@@ -9,10 +9,13 @@ class Designers(models.Model):
     firmname=models.CharField(max_length=30,null=True)
     contact=models.CharField(max_length=10,null=True)
     address=models.TextField(max_length=200,null=True)
-    design=models.ImageField(null=True)
+    profilepic=models.ImageField(null=True)
     email=models.EmailField(max_length=30,null=True)
     password=models.CharField(max_length=10,null=True)
-    points=models.IntegerField(null=True)
+    points=models.IntegerField(null=True,default=100)
+    design1=models.ImageField(null=True)
+    design2=models.ImageField(null=True)
+    design3=models.ImageField(null=True)
 
 
 

@@ -33,24 +33,24 @@
 <br>
      <br>
      <br>
-<div   style="padding-left:34%;padding-top:40px;opacity:40%">
+<div   style="padding-left:34%;opacity:40%">
 
 
       <form name = "form" action = "{% url 'designers:registeration' %}"
-         method = "POST" style="background-color:rgba(255,255,255,0.7);width:40%;border-radius:20px"  id="opening" >{% csrf_token %}
+         method = "POST" style="background-color:rgba(255,255,255,0.7);width:48.48%;border-radius:20px"  id="opening" >{% csrf_token %}
           <div style="background:#008553 ;width=40%;border-top-left-radius:20px;border-top-right-radius:20px">
 
-        <h1 style="color:#FFFFFF;margin-left:10%;margin-top:20px">Designer Login</h1>
+        <p style="color:#FFFFFF;font-size:200%;margin-left:10%;padding-bottom:10px;padding-top:10px">Designer Login</p>
 
          </div>
-         <br>
+
          <div style = "max-width:100%;">
-             <p  style="padding-left:10% ;margin-down:0px"> Username:</p>
+             <p  style="padding-left:10%"> Username:</p>
 
             <center>
 
                <input type = "text" style = "height:33px;width:80%;border-radius:6px"
-                  placeholder = "Identifiant" name = "designerID" />
+                  placeholder = "DesignerID" name = "designerID" />
             </center>
          </div>
 
@@ -61,7 +61,7 @@
              <p  style="padding-left:10% ;margin-down:0px"> Password:</p>
             <center>
                <input type = "password" style = "height:33px;width:80%;border-radius:6px"
-                  placeholder = "Identifiant" name = "password" />
+                  placeholder = "Password" name = "password" />
             </center>
          </div>
 
