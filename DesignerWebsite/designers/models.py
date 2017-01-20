@@ -20,7 +20,7 @@ class Designers(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('designers:index')
+        return reverse('designers:regcon')
 
 
     def __str__(self):

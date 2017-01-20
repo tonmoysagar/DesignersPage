@@ -94,3 +94,17 @@ def login(request):
         print(profilepic)
         return render(request, 'designers/loggedin.html', {"designerID": designerID,'profilepic':profilepic})
     return  render(request,'designers/register.html',{})
+
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def regcon(request):
+    if request.session.has_key('designerID'):
+        designerID = request.session['designerID']
+        dbuser = Designers.objects.filter(designerID=designerID)
+        user = dbuser[0]
+        profilepic = user.profilepic.url
+        return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
+    context={
+
+    }
+    return render(request,'designers/regconfirm.html',context=context)
