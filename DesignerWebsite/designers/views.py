@@ -14,7 +14,7 @@ def index(request):
         dbuser = Designers.objects.filter(designerID=designerID)
         if dbuser:
             user = dbuser[0]
-            profilepic = user.design.url
+            profilepic = user.profilepic.url
             return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
     context={
 
@@ -31,7 +31,7 @@ def registeration(request):
             dbuser = Designers.objects.filter(designerID=designerID)
             if dbuser:
                 user = dbuser[0]
-                profilepic = user.design.url
+                profilepic = user.profilepic.url
                 return render(request, 'designers/loggedin.html', {"designerID": designerID,'profilepic':profilepic})
         # Get the posted form
         MyRegisterForm = DesignerDetails(request.POST)
@@ -46,7 +46,7 @@ def registeration(request):
             dbuser = Designers.objects.filter(designerID=designerID,password=password)
             if dbuser:
                 user = dbuser[0]
-                profilepic = user.design.url
+                profilepic = user.profilepic.url
                 request.session['designerID'] = designerID
                 return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
             content={
@@ -69,7 +69,7 @@ def registeration(request):
            dbuser = Designers.objects.filter(designerID=designerID)
            if dbuser:
                user = dbuser[0]
-               profilepic = user.design.url
+               profilepic = user.profilepic.url
                return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
 
        return render(request, 'designers/register.html', {})
@@ -93,7 +93,7 @@ def login(request):
         dbuser = Designers.objects.filter(designerID=designerID)
         if dbuser:
             user = dbuser[0]
-            profilepic = user.design.url
+            profilepic = user.profilepic.url
             return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
 
     return  render(request,'designers/register.html',{})
@@ -106,7 +106,7 @@ def regcon(request):
         dbuser = Designers.objects.filter(designerID=designerID)
         if dbuser:
             user = dbuser[0]
-            profilepic = user.design.url
+            profilepic = user.profilepic.url
             return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
 
     context={
