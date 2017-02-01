@@ -83,7 +83,7 @@ def logout(request):
       del request.session['designerID']
     except:
       pass
-    return HttpResponse("<strong>You are logged out.</strong>")
+    return render(request,'designers/logout.html',{})
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login(request):
