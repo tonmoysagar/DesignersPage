@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
 {% load staticfiles %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Ghar Banao Designers</title>
     <!-- Latest compiled and minified CSS -->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
@@ -14,9 +15,11 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
+
    <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -26,7 +29,7 @@
         </div>
          <br>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">OUR DESIGNERS</a></li>
+            <li><a href="{% url 'designers:ourDes' %}">OUR DESIGNERS</a></li>
             <li><a href="#">ABOUT US</a></li>
             <li><a href="{% url 'designers:login' %}">LOGIN</a></li>
 			<li><a href="{% url 'designers:register' %}">REGISTER</a></li>
@@ -36,7 +39,7 @@
 
 
 </nav>
-   {% extends 'designers/base.html}
+
    <br>
    <br>
    <br>

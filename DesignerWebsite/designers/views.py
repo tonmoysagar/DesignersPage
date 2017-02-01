@@ -13,9 +13,10 @@ def index(request):
         designerID = request.session['designerID']
         dbuser = Designers.objects.filter(designerID=designerID)
         if dbuser:
-            user = dbuser[0]
-            profilepic = user.profilepic.url
-            return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
+            context = {
+                'dbuser': dbuser
+            }
+            return render(request, 'designers/loggedin.html', context)
     context={
 
     }
@@ -30,9 +31,10 @@ def registeration(request):
             designerID = request.session['designerID']
             dbuser = Designers.objects.filter(designerID=designerID)
             if dbuser:
-                user = dbuser[0]
-                profilepic = user.profilepic.url
-                return render(request, 'designers/loggedin.html', {"designerID": designerID,'profilepic':profilepic})
+                context = {
+                    'dbuser': dbuser
+                }
+                return render(request, 'designers/loggedin.html', context)
         # Get the posted form
         MyRegisterForm = DesignerDetails(request.POST)
         content={'form':MyRegisterForm}
@@ -48,11 +50,10 @@ def registeration(request):
                 user = dbuser[0]
                 profilepic = user.profilepic.url
                 request.session['designerID'] = designerID
-                return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
-            content={
-                'designerID': designerID,
-
-            }
+                context = {
+                    'dbuser': dbuser
+                }
+                return render(request, 'designers/loggedin.html', context)
             if not dbuser:
                 print("Not user")
                 return render(request, 'designers/register.html', {})
@@ -68,15 +69,16 @@ def registeration(request):
            designerID = request.session['designerID']
            dbuser = Designers.objects.filter(designerID=designerID)
            if dbuser:
-               user = dbuser[0]
-               profilepic = user.profilepic.url
-               return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
+               context = {
+                   'dbuser': dbuser
+               }
+               return render(request, 'designers/loggedin.html', context)
 
        return render(request, 'designers/register.html', {})
 
 class DesignerCreate(CreateView):
     model=Designers
-    fields = ['name','firmname','contact','address','profilepic','email','design1','design2','design3']
+    fields = ['name','firmname','contact','address','profilepic','email','AboutMe','AboutYourDesigns','design1','design2','design3']
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logout(request):
     try:
@@ -94,7 +96,10 @@ def login(request):
         if dbuser:
             user = dbuser[0]
             profilepic = user.profilepic.url
-            return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
+            context={
+                'dbuser':dbuser
+            }
+            return render(request, 'designers/loggedin.html',context)
 
     return  render(request,'designers/register.html',{})
 
@@ -105,11 +110,19 @@ def regcon(request):
         designerID = request.session['designerID']
         dbuser = Designers.objects.filter(designerID=designerID)
         if dbuser:
-            user = dbuser[0]
-            profilepic = user.profilepic.url
-            return render(request, 'designers/loggedin.html', {"designerID": designerID, 'profilepic': profilepic})
-
+            context = {
+                'dbuser': dbuser
+            }
+            return render(request, 'designers/loggedin.html', context)
     context={
 
     }
     return render(request,'designers/regconfirm.html',context=context)
+
+
+
+def designersview(request):
+    all_designers=Designers.objects.exclude(designerID__isnull=True).exclude(designerID__exact='').order_by('-points')
+    context = {'all_designers':all_designers}
+    return render(request, 'designers/our_designers.html',context)
+
