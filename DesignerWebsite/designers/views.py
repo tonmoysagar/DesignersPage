@@ -188,7 +188,7 @@ def PortfolioFill(request):
 
     return render(request, 'designers/register.html.html', {})
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
 def change_password(request):
     if not request.session.has_key('designerID'):
         return render(request, 'designers/register.html', {})
@@ -208,10 +208,15 @@ def change_password(request):
                     dbuser = Designers.objects.filter(designerID=designerID,password=old_password)
                     user.password = new_password
                     user.save(update_fields=['password'])
-                    context = {
-                        'dbuser': dbuser
-                    }
-                    return render(request, 'designers/loggedin.html', context)
+                    dbuser = Designers.objects.filter(designerID=designerID)
+                    if dbuser:
+                        user = dbuser[0]
+                        profilepic = user.profilepic.url
+
+                        context = {
+                            'dbuser': dbuser
+                        }
+                        return render(request, 'designers/loggedin.html', context)
                 else:
                     print('not user ')
                     del request.session['designerID']
