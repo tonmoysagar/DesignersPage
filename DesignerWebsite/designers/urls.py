@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'dashboard/$', views.registeration , name='registeration'),
     url(r'^logout/$', views.logout, name = 'logout'),
     url(r'registerconf/$', views.regcon,name='regcon'),
-    url(r'our_designers',views.designersview,name='ourDes')
+    url(r'our_designers',views.designersview,name='ourDes'),
+    url(r'portfolio_fill/$',views.PortfolioFill,name='PortfolioFill')
 ]

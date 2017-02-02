@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView
 from .  models import Designers
-from . forms import DesignerDetails
+from . forms import DesignerDetails,PortfolioDetails
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_control
 from django.views.decorators.cache import never_cache
@@ -34,6 +34,8 @@ def registeration(request):
                 context = {
                     'dbuser': dbuser
                 }
+
+
                 return render(request, 'designers/loggedin.html', context)
         # Get the posted form
         MyRegisterForm = DesignerDetails(request.POST)
@@ -53,6 +55,8 @@ def registeration(request):
                 context = {
                     'dbuser': dbuser
                 }
+                if not dbuser[0].PortfolioFilled:
+                    return render(request,'designers/portfolioFill.html',context)
                 return render(request, 'designers/loggedin.html', context)
             if not dbuser:
                 print("Not user")
@@ -125,4 +129,50 @@ def designersview(request):
     all_designers=Designers.objects.exclude(designerID__isnull=True).exclude(designerID__exact='').order_by('-points')
     context = {'all_designers':all_designers}
     return render(request, 'designers/our_designers.html',context)
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def PortfolioFill(request):
+    design2 = None
+    design3 = None
+    AboutMe = ""
+    AboutYourDesigns =""
+    if request.method == "POST":
+        print("hello")
+        PortFolioForm=PortfolioDetails(request.POST)
+        print(PortFolioForm.errors)
+        if PortFolioForm.is_valid():
+
+            AboutMe = PortFolioForm.cleaned_data['AboutMe']
+            print(AboutMe)
+            AboutYourDesigns = PortFolioForm.cleaned_data['AboutYourDesigns']
+            if request.session.has_key('designerID'):
+                designerID = request.session['designerID']
+                dbuser = Designers.objects.filter(designerID=designerID)
+                user=Designers.objects.get(designerID=designerID)
+
+                user.AboutMe = AboutMe
+                user.AboutYourDesigns=AboutYourDesigns
+                user.PortfolioFilled=True
+
+                user.save(update_fields=['AboutMe','AboutYourDesigns','PortfolioFilled'])
+
+                context = {
+                    'dbuser': dbuser
+                }
+                return render(request, 'designers/loggedin.html', context)
+            else:
+                render(request, 'designers/register.html', {})
+        else:
+            print("invalid form")
+
+    else:
+        PortFolioForm=PortfolioDetails(request.GET)
+        return render(request, 'designers/portfolioFill.html', {})
+
+    return render(request, 'designers/portfolioFill.html', {})
+
+
+
+
+
 

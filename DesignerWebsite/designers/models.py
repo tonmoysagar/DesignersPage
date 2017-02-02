@@ -16,8 +16,9 @@ class Designers(models.Model):
     design1=models.ImageField(null=True)
     design2=models.ImageField(null=True)
     design3=models.ImageField(null=True)
-    AboutMe=models.TextField(max_length=100,null=True,default="Please tell us about your personallity and why shoud customers be interested in you")
+    AboutMe=models.TextField(max_length=200,null=True,default="Please tell us about your personallity and why shoud customers be interested in you")
     AboutYourDesigns=models.TextField(max_length=200,null=True,default="Please tell us about your design styles")
+    PortfolioFilled=models.BooleanField(default=False)
 
 
 
@@ -26,7 +27,7 @@ class Designers(models.Model):
 
 
     def __str__(self):
-        return self.name+' '+ self.firmname+' '+self.address
+        return self.name+' '+ self.firmname+' '+self.address+' '+self.AboutMe
 
 class Designer(models.Model):
     designerPro=models.ForeignKey(Designers,on_delete=models.CASCADE)
