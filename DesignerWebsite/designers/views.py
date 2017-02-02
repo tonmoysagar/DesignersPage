@@ -91,7 +91,7 @@ def registeration(request):
 
 class DesignerCreate(CreateView):
     model=Designers
-    fields = ['name','firmname','contact','address','profilepic','email','AboutMe','AboutYourDesigns','design1','design2','design3']
+    fields = ['name','firmname','contact','address','email']
 
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -111,10 +111,7 @@ def login(request):
         if dbuser:
             user = dbuser[0]
             profilepic = user.profilepic.url
-            contact_message='successfully sent'
-            from_email=settings.EMAIL_HOST_USER
-            to_email=['aianisulislam@gmail.com']
-            send_mail('Test',contact_message,from_email,to_email,fail_silently=False)
+
             context={
                 'dbuser':dbuser
             }

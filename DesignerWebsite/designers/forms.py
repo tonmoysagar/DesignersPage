@@ -13,6 +13,9 @@ class DesignerDetails(forms.Form):
             raise forms.ValidationError("User does not exist in our db!")
         return designerID
 
+class SendMail(forms.Form):
+    Send_To=forms.CharField(max_length=30)
+
 
 class PortfolioDetails(forms.Form):
     AboutMe=forms.CharField(max_length=200)
