@@ -132,12 +132,14 @@ def designersview(request):
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def PortfolioFill(request):
+    if not request.session.has_key('designerID'):
+        return render(request, 'designers/register.html', {})
     design2 = None
     design3 = None
     AboutMe = ""
     AboutYourDesigns =""
     if request.method == "POST":
-        print("hello")
+
         PortFolioForm=PortfolioDetails(request.POST)
         print(PortFolioForm.errors)
         if PortFolioForm.is_valid():
@@ -151,7 +153,6 @@ def PortfolioFill(request):
                 designerID = request.session['designerID']
                 dbuser = Designers.objects.filter(designerID=designerID)
                 user=Designers.objects.get(designerID=designerID)
-                print(request.FILES)
                 user.AboutMe = AboutMe
                 user.AboutYourDesigns=AboutYourDesigns
                 user.PortfolioFilled=True
@@ -175,6 +176,9 @@ def PortfolioFill(request):
 
     return render(request, 'designers/portfolioFill.html', {})
 
+
+def change_password(request):
+    return render(request,'designers/changePassword.html',{})
 
 
 

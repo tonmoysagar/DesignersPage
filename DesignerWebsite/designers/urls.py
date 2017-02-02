@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name = 'logout'),
     url(r'registerconf/$', views.regcon,name='regcon'),
     url(r'our_designers',views.designersview,name='ourDes'),
-    url(r'portfolio_fill/$',views.PortfolioFill,name='PortfolioFill')
+    url(r'portfolio_fill/$',views.PortfolioFill,name='PortfolioFill'),
+    url(r'change_password/$',views.change_password,name='password_change')
 ]
