@@ -6,6 +6,8 @@ from . forms import DesignerDetails,PortfolioDetails,ConfirmPasswordForm
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_control
 from django.views.decorators.cache import never_cache
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index(request):
@@ -43,9 +45,9 @@ def registeration(request):
         MyRegisterForm = DesignerDetails(request.POST)
         form_errors= MyRegisterForm.errors
         content={
-                  'form':MyRegisterForm,
-                   'errors':  form_errors
-                 }
+            'form':MyRegisterForm,
+            'errors':  form_errors
+        }
         print( MyRegisterForm.errors)
         if MyRegisterForm.is_valid():
             designerID=MyRegisterForm.cleaned_data['designerID']
@@ -74,17 +76,17 @@ def registeration(request):
             print("not valid")
             return render(request, 'designers/register.html', {})
     else:
-       MyRegisterForm=DesignerDetails(request.GET)
-       if request.session.has_key('designerID'):
-           designerID = request.session['designerID']
-           dbuser = Designers.objects.filter(designerID=designerID)
-           if dbuser:
-               context = {
-                   'dbuser': dbuser
-               }
-               return render(request, 'designers/loggedin.html', context)
+        MyRegisterForm=DesignerDetails(request.GET)
+        if request.session.has_key('designerID'):
+            designerID = request.session['designerID']
+            dbuser = Designers.objects.filter(designerID=designerID)
+            if dbuser:
+                context = {
+                    'dbuser': dbuser
+                }
+                return render(request, 'designers/loggedin.html', context)
 
-       return render(request, 'designers/register.html', {})
+        return render(request, 'designers/register.html', {})
 
 
 class DesignerCreate(CreateView):
@@ -95,9 +97,9 @@ class DesignerCreate(CreateView):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logout(request):
     try:
-      del request.session['designerID']
+        del request.session['designerID']
     except:
-      pass
+        pass
     return render(request,'designers/logout.html',{})
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -109,6 +111,10 @@ def login(request):
         if dbuser:
             user = dbuser[0]
             profilepic = user.profilepic.url
+            contact_message='successfully sent'
+            from_email=settings.EMAIL_HOST_USER
+            to_email=['aianisulislam@gmail.com']
+            send_mail('Test',contact_message,from_email,to_email,fail_silently=False)
             context={
                 'dbuser':dbuser
             }
@@ -139,7 +145,7 @@ def designersview(request):
     context = {'all_designers':all_designers}
     return render(request, 'designers/our_designers.html',context)
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
 def PortfolioFill(request):
     if not request.session.has_key('designerID'):
         return render(request, 'designers/register.html', {})
@@ -183,7 +189,7 @@ def PortfolioFill(request):
         PortFolioForm=PortfolioDetails(request.GET)
         return render(request, 'designers/portfolioFill.html', {})
 
-    return render(request, 'designers/portfolioFill.html', {})
+    return render(request, 'designers/register.html.html', {})
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def change_password(request):
@@ -221,10 +227,8 @@ def change_password(request):
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def wrongPassword(request):
-    try:
-        del request.session['designerID']
-    except:
-        pass
+    if not request.session.has_key('designerID'):
+        return render(request, 'designers/register.html', {})
     return render(request, 'designers/WrongPassword.html', {})
 
 
