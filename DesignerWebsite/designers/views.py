@@ -145,16 +145,20 @@ def PortfolioFill(request):
             AboutMe = PortFolioForm.cleaned_data['AboutMe']
             print(AboutMe)
             AboutYourDesigns = PortFolioForm.cleaned_data['AboutYourDesigns']
+            design2=request.FILES['design2']
+            design3 = request.FILES['design3']
             if request.session.has_key('designerID'):
                 designerID = request.session['designerID']
                 dbuser = Designers.objects.filter(designerID=designerID)
                 user=Designers.objects.get(designerID=designerID)
-
+                print(request.FILES)
                 user.AboutMe = AboutMe
                 user.AboutYourDesigns=AboutYourDesigns
                 user.PortfolioFilled=True
+                user.design2=design2
+                user.design3=design3
 
-                user.save(update_fields=['AboutMe','AboutYourDesigns','PortfolioFilled'])
+                user.save(update_fields=['AboutMe','AboutYourDesigns','PortfolioFilled','design2','design3'])
 
                 context = {
                     'dbuser': dbuser

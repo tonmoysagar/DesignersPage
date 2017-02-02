@@ -6,15 +6,33 @@
 </head>
 <body>
  <form name = "form" action = "{% url 'designers:PortfolioFill' %}"
-         method = "POST" style="background-color:rgba(255,255,255,0.7);width:48.48%;border-radius:20px"  id="opening" >{% csrf_token %}
+         method = "POST" style="background-color:rgba(255,255,255,0.7);width:48.48%;border-radius:20px"  id="opening"  enctype="multipart/form-data">{% csrf_token %}
           <div style="background:#008553 ;width=40%;border-top-left-radius:20px;border-top-right-radius:20px">
 
         <p style="color:#FFFFFF;font-size:200%;margin-left:10%;padding-bottom:10px;padding-top:10px">Designer Login</p>
 
          </div>
 
+         <div style = "max-width:100%;">
+             <p  style="padding-left:10%"> Upload a Design:</p>
 
+            <center>
 
+               <input type = "file" style = "height:33px;width:80%;border-radius:6px"
+                   name = "design2" />
+            </center>
+         </div>
+
+         <br>
+         <div style = "max-width:100%;">
+             <p  style="padding-left:10%"> Upload a second Design:</p>
+
+            <center>
+
+               <input type = "file" style = "height:33px;width:80%;border-radius:6px"
+                   name = "design3" />
+            </center>
+         </div>
 
          <br>
           <div style = "max-width:100%;">

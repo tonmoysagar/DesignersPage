@@ -17,10 +17,20 @@ class DesignerDetails(forms.Form):
 class PortfolioDetails(forms.Form):
     AboutMe=forms.CharField(max_length=200)
     AboutYourDesigns=forms.CharField(max_length=300)
+    design2=forms.ImageField()
+    design3 = forms.ImageField()
+
+    def __init__(self, *args, **kwargs):
+        super(PortfolioDetails, self).__init__(*args, **kwargs)
+        self.fields['design2'].required = False
+        self.fields['design3'].required=False
+
 
     def clean_message(self):
 
         cleaned_data=super(PortfolioDetails, self).clean()
         AboutMe=cleaned_data.get("AboutMe")
         AboutYourDesigns=cleaned_data.get("AboutYourDesigns")
+        design2=cleaned_data.get("design2")
+        design3=cleaned_data.get("design3")
         return AboutMe
