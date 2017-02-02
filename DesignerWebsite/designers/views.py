@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views.decorators.cache import cache_control
 from django.views.decorators.cache import never_cache
 # Create your views here.
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index(request):
     if request.session.has_key('designerID'):
         designerID = request.session['designerID']
@@ -21,6 +21,8 @@ def index(request):
 
     }
     return render(request,'designers/index.html',context=context)
+
+
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def registeration(request):
     designerID=""
@@ -39,7 +41,11 @@ def registeration(request):
                 return render(request, 'designers/loggedin.html', context)
         # Get the posted form
         MyRegisterForm = DesignerDetails(request.POST)
-        content={'form':MyRegisterForm}
+        form_errors= MyRegisterForm.errors
+        content={
+                  'form':MyRegisterForm,
+                   'errors':  form_errors
+                 }
         print( MyRegisterForm.errors)
         if MyRegisterForm.is_valid():
             designerID=MyRegisterForm.cleaned_data['designerID']
@@ -80,9 +86,12 @@ def registeration(request):
 
        return render(request, 'designers/register.html', {})
 
+
 class DesignerCreate(CreateView):
     model=Designers
     fields = ['name','firmname','contact','address','profilepic','email','AboutMe','AboutYourDesigns','design1','design2','design3']
+
+
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logout(request):
     try:
@@ -124,7 +133,7 @@ def regcon(request):
     return render(request,'designers/regconfirm.html',context=context)
 
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def designersview(request):
     all_designers=Designers.objects.exclude(designerID__isnull=True).exclude(designerID__exact='').order_by('-points')
     context = {'all_designers':all_designers}
@@ -176,13 +185,13 @@ def PortfolioFill(request):
 
     return render(request, 'designers/portfolioFill.html', {})
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def change_password(request):
     if not request.session.has_key('designerID'):
         return render(request, 'designers/register.html', {})
     old_password=""
     new_password=""
-    if request.method == "POST":
+    if request.session.has_key('designerID') and request.method == "POST":
         MyForm=ConfirmPasswordForm(request.POST)
         print(MyForm.errors)
         if MyForm.is_valid():
@@ -191,8 +200,8 @@ def change_password(request):
             print(old_password)
             if request.session.has_key('designerID'):
                 designerID = request.session['designerID']
-                user = Designers.objects.get(designerID=designerID,password=old_password)
-                if user:
+                user = Designers.objects.get(designerID=designerID)
+                if user and user.password==old_password:
                     dbuser = Designers.objects.filter(designerID=designerID,password=old_password)
                     user.password = new_password
                     user.save(update_fields=['password'])
@@ -202,11 +211,21 @@ def change_password(request):
                     return render(request, 'designers/loggedin.html', context)
                 else:
                     print('not user ')
-                    return render(request, 'designers/logout.html', {})
+                    del request.session['designerID']
+                    return render(request, 'designers/WrongPassword.html', {})
+    elif request.session.has_key('designerID') and request.method=="GET":
+        return render(request,'designers/changePassword.html',{})
 
 
+    return render(request,'designers/index.html',{})
 
-    return render(request,'designers/changePassword.html',{})
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def wrongPassword(request):
+    try:
+        del request.session['designerID']
+    except:
+        pass
+    return render(request, 'designers/WrongPassword.html', {})
 
 
 
