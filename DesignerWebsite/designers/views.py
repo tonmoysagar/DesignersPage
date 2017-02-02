@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView
 from .  models import Designers
-from . forms import DesignerDetails,PortfolioDetails
+from . forms import DesignerDetails,PortfolioDetails,ConfirmPasswordForm
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_control
 from django.views.decorators.cache import never_cache
@@ -178,6 +178,34 @@ def PortfolioFill(request):
 
 
 def change_password(request):
+    if not request.session.has_key('designerID'):
+        return render(request, 'designers/register.html', {})
+    old_password=""
+    new_password=""
+    if request.method == "POST":
+        MyForm=ConfirmPasswordForm(request.POST)
+        print(MyForm.errors)
+        if MyForm.is_valid():
+            old_password=MyForm.cleaned_data['old_password']
+            new_password = MyForm.cleaned_data['new_password']
+            print(old_password)
+            if request.session.has_key('designerID'):
+                designerID = request.session['designerID']
+                user = Designers.objects.get(designerID=designerID,password=old_password)
+                if user:
+                    dbuser = Designers.objects.filter(designerID=designerID,password=old_password)
+                    user.password = new_password
+                    user.save(update_fields=['password'])
+                    context = {
+                        'dbuser': dbuser
+                    }
+                    return render(request, 'designers/loggedin.html', context)
+                else:
+                    print('not user ')
+                    return render(request, 'designers/logout.html', {})
+
+
+
     return render(request,'designers/changePassword.html',{})
 
 

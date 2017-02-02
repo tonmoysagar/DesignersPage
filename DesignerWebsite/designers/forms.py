@@ -34,3 +34,13 @@ class PortfolioDetails(forms.Form):
         design2=cleaned_data.get("design2")
         design3=cleaned_data.get("design3")
         return AboutMe
+
+
+class ConfirmPasswordForm(forms.Form):
+    old_password=forms.CharField(widget=forms.PasswordInput())
+    new_password=forms.CharField(widget=forms.PasswordInput())
+    def clean_message(self):
+        cleaned_data=super(ConfirmPasswordForm, self).clean()
+        old_password=cleaned_data.get("old_password")
+        new_password=cleaned_data.get("new_password")
+        return old_password
